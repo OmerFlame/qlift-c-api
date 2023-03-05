@@ -28,7 +28,11 @@ let package = Package(
                         "-I/usr/local/opt/qt/lib/QtCore.framework/Headers",
                         "-I/usr/local/opt/qt/lib/QtGui.framework/Headers",
                         "-I/usr/local/opt/qt/lib/QtWidgets.framework/Headers",
-                        "-I/usr/local/opt/qt/include"
+                        "-I/usr/local/opt/qt/include",
+                        "-I/opt/homebrew/opt/qt@5/lib/QtWidgets.framework/Headers",
+                        "-I/opt/homebrew/opt/qt@5/lib/QtCore.framework/Headers",
+                        "-I/opt/homebrew/opt/qt@5/lib/QtGui.framework/Headers",
+                        "-I/opt/homebrew/opt/qt@5/include/"
                     ],
                     .when(platforms: [.macOS])
                 )
@@ -38,6 +42,9 @@ let package = Package(
                         "/usr/local/opt/qt/lib/QtCore.framework/QtCore",
                         "/usr/local/opt/qt/lib/QtGui.framework/QtGui",
                         "/usr/local/opt/qt/lib/QtWidgets.framework/QtWidgets",
+                        "/opt/homebrew/opt/qt@5/lib/QtCore.framework/QtCore",
+                        "/opt/homebrew/opt/qt@5/lib/QtGui.framework/QtGui",
+                        "/opt/homebrew/opt/qt@5/lib/QtWidgets.framework/QtWidgets",
                     ],
                     .when(platforms: [.macOS])
                 )
@@ -45,7 +52,8 @@ let package = Package(
         ),
         .systemLibrary(
             name: "CQt5Widgets",
-            pkgConfig: "Qt5Widgets"
+            pkgConfig: "Qt5Widgets",
+            providers: [.brewItem(["qt@5"])]
         )
     ],
     cxxLanguageStandard: .cxx1z
